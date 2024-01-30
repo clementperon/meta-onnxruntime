@@ -22,16 +22,26 @@ DEPENDS += "\
             python3-numpy \
 "
 
-inherit cmake
+inherit cmake python3-dir
 
 OECMAKE_SOURCEPATH = "${S}/cmake"
 S = "${WORKDIR}/git"
+
+PYBIND11_INCLUDE = "${PYTHON_INCLUDE_DIR}/pybind11"
+NUMPY_INCLUDE = "${PKG_CONFIG_SYSROOT_DIR}/${PYTHON_SITEPACKAGES_DIR}/numpy/core/include"
+
+OECMAKE_C_FLAGS += "-I${PYTHON_INCLUDE_DIR} -I${PYBIND11_INCLUDE} -I${NUMPY_INCLUDE}"
+OECMAKE_C_FLAGS_RELEASE += "-I${PYTHON_INCLUDE_DIR} -I${PYBIND11_INCLUDE} -I${NUMPY_INCLUDE}"
+OECMAKE_CXX_FLAGS += "-I${PYTHON_INCLUDE_DIR} -I${PYBIND11_INCLUDE} -I${NUMPY_INCLUDE}"
+OECMAKE_CXX_FLAGS_RELEASE += "-I${PYTHON_INCLUDE_DIR} -I${PYBIND11_INCLUDE} -I${NUMPY_INCLUDE}"
 
 EXTRA_OECMAKE:append = " \
     -Donnxruntime_RUN_ONNX_TESTS=OFF \
     -Donnxruntime_GENERATE_TEST_REPORTS=ON \
     -Donnxruntime_USE_MIMALLOC=OFF \
-    -Donnxruntime_ENABLE_PYTHON=OFF \
+    -Donnxruntime_ENABLE_PYTHON=ON \
+    -DPython_EXECUTABLE=${STAGING_BINDIR_NATIVE}/${PYTHON_PN}-native/${PYTHON_PN} \
+    -DPYTHON_EXECUTABLE=${STAGING_BINDIR_NATIVE}/${PYTHON_PN}-native/${PYTHON_PN} \
     -Donnxruntime_BUILD_CSHARP=OFF \
     -Donnxruntime_BUILD_JAVA=OFF \
     -Donnxruntime_BUILD_NODEJS=OFF \
@@ -109,12 +119,13 @@ EXTRA_OECMAKE:append = " \
     -Donnxruntime_ENABLE_MEMLEAK_CHECKER=OFF \
     -DCMAKE_BUILD_TYPE=Release \
     -DCMAKE_PREFIX_PATH=${WORKDIR}/git/build/Linux/Release/installed \
-    -Donnxruntime_CROSS_COMPILING=ON \
     -DCMAKE_SYSTEM_PROCESSOR=aarch64 \
     -Donnxruntime_target_platform=aarch64 \
     -DMLAS_SOURCE_IS_NOT_SET=OFF \
     -DFETCHCONTENT_FULLY_DISCONNECTED=OFF \
 "
+CMAKE_VERBOSE = "VERBOSE=1"
+
 do_configure[network] = "1"
 
 FILES:${PN}-dev = " \
