@@ -7,7 +7,10 @@ Yocto layer for ONNX Runtime.
 
 
 ## Available BSP
-W.I.P
+| BSP | ONNX Runtime version | Build status |
+| :-- | :------ | :----------- |
+| [meta-raspberrypi](https://github.com/agherzan/meta-raspberrypi) | v1.16.3 | W.I.P |
+| [meta-riscv](https://github.com/riscv/meta-riscv)                | v1.16.3 | W.I.P |
 
 Please note that it is not official support.
 
