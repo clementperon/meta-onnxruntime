@@ -181,5 +181,5 @@ FILES:${PN}-dev = " \
 FILES:${PN} += "${libdir}/libonnxruntime.so"
 FILES:${PN} += "${libdir}/libonnxruntime.so.*"
 FILES:${PN} += "${libdir}/libonnxruntime_providers_shared.so"
-FILES:${PN} += "${libdir}/python3.11/site-packages/*"
+FILES:${PN} += "${libdir}/python3.12/site-packages/*"
 FILES:${PN} += "${bindir}/onnx_test_runner"
