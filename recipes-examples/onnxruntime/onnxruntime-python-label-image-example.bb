@@ -21,6 +21,7 @@ SRC_URI[model.sha256sum] = "0e7c0aa4bc74650386fa1d2c84705753de7c2bdb21909ada5c59
 
 RDEPENDS:${PN} += " \
     onnxruntime \
+    opencv \
 "
 
 S = "${WORKDIR}/git"
