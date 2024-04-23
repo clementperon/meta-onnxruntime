@@ -8,20 +8,36 @@ LIC_FILES_CHKSUM = "file://LICENSE;md5=0f7e3b1308cb5c00b372a6e78835732d"
 BPV = "${@'.'.join(d.getVar('PV').split('.')[0:2])}"
 DPV = "${@'.'.join(d.getVar('PV').split('.')[0:3])}"
 
-SRCREV_onnxruntime = "2ac381c55397dffff327cc6efecf6f95a70f90a1"
+SRCREV_onnxruntime = "56b660f36940a919295e6f1e18ad3a9a93a10bf7"
 
 SRC_URI = " \
-    git://github.com/microsoft/onnxruntime.git;name=onnxruntime;branch=rel-1.16.3;protocol=https \
-    file://001-fix_build_error.patch \
-    file://001-fix_requirements.txt.patch \
+    git://github.com/microsoft/onnxruntime.git;name=onnxruntime;branch=rel-1.17.3;protocol=https \
+    file://0001-fix_requirements.txt.patch \
+    file://0001-modify_platform_cpp.patch \
+"
+
+SRC_URI:append:raspberrypi5 = " \
+    file://0001-fix_mlas_build_error_rpi5.patch \
+"
+
+SRC_URI:append:raspberrypi4-64 = " \
+    file://0001-fix_mlas_build_error.patch \
+"
+
+SRC_URI:append:raspberrypi3-64 = " \
+    file://0001-fix_mlas_build_error.patch \
+"
+
+SRC_URI:append:raspberrypi0-2w-64 = " \
+    file://0001-fix_mlas_build_error.patch \
 "
 
 SRC_URI:append:riscv32 = " \
-    file://001-fix_riscv_build_error.patch \
+    file://0001-fix_riscv_build_error.patch \
 "
 
 SRC_URI:append:riscv64 = " \
-    file://001-fix_riscv_build_error.patch \
+    file://0001-fix_riscv_build_error.patch \
 "
 
 S = "${WORKDIR}/git"
@@ -56,6 +72,7 @@ ONNXRUNTIME_TARGET_ARCH:raspberrypi-cm3 = "armv7"
 ONNXRUNTIME_TARGET_ARCH:raspberrypi0-2w-64 = "aarch64"
 ONNXRUNTIME_TARGET_ARCH:raspberrypi3-64 = "aarch64"
 ONNXRUNTIME_TARGET_ARCH:raspberrypi4-64 = "aarch64"
+ONNXRUNTIME_TARGET_ARCH:raspberrypi5 = "aarch64"
 ONNXRUNTIME_TARGET_ARCH:riscv32 = "riscv32"
 ONNXRUNTIME_TARGET_ARCH:riscv64 = "riscv64"
 
@@ -139,7 +156,6 @@ EXTRA_OECMAKE:append = " \
     -Donnxruntime_ENABLE_EXTERNAL_CUSTOM_OP_SCHEMAS=OFF \
     -Donnxruntime_ENABLE_CUDA_PROFILING=OFF \
     -Donnxruntime_ENABLE_ROCM_PROFILING=OFF \
-    -Donnxruntime_USE_XNNPACK=OFF \
     -Donnxruntime_USE_WEBNN=OFF \
     -Donnxruntime_USE_CANN=OFF \
     -Donnxruntime_USE_TRITON_KERNEL=OFF \
@@ -152,10 +168,20 @@ EXTRA_OECMAKE:append = " \
     -DCMAKE_BUILD_TYPE=Release \
     -DCMAKE_PREFIX_PATH=${WORKDIR}/git/build/Linux/Release/installed \
     -DCMAKE_SYSTEM_PROCESSOR=${ONNXRUNTIME_TARGET_ARCH} \
-    -Donnxruntime_target_platform=${ONNXRUNTIME_TARGET_ARCH} \
+    -Donnxruntime_target_platform=ARM \
     -DMLAS_SOURCE_IS_NOT_SET=OFF \
     -DFETCHCONTENT_FULLY_DISCONNECTED=OFF \
+    -Donnxruntime_BUILD_UNIT_TESTS=OFF \
 "
+
+EXTRA_OECMAKE:append:raspberrypi5 = " \
+    -Donnxruntime_USE_XNNPACK=OFF \
+"
+
+EXTRA_OECMAKE:append:raspberrypi4-64 = " \
+    -Donnxruntime_USE_XNNPACK=OFF \
+"
+
 CMAKE_VERBOSE = "VERBOSE=1"
 
 do_configure[network] = "1"

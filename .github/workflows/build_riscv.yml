@@ -1,0 +1,68 @@
+# This is a basic workflow to help you get started with Actions
+
+name: Bitbake qemuriscv
+
+# Controls when the workflow will run
+on:
+  # Triggers the workflow on push or pull request events but only for the kirkstone branch
+  push:
+    branches: [ main ]
+  pull_request:
+    branches: [ main ]
+  schedule:
+    - cron: '0 12 * * 5'
+
+  # Allows you to run this workflow manually from the Actions tab
+  workflow_dispatch:
+
+env:
+  TARGET_VERSION: master
+  TARGET_BITBAKE_VERSION: master
+
+# A workflow run is made up of one or more jobs that can run sequentially or in parallel
+jobs:
+  bitbake-riscv:
+
+    strategy:
+      matrix:
+        target_machine: [qemuriscv64, qemuriscv32]
+        onnxruntime_version: [1.17.3]
+        
+    # The type of runner that the job will run on
+    runs-on: ubuntu-22.04
+
+    # Steps represent a sequence of tasks that will be executed as part of the job
+    steps:
+      # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
+      - uses: actions/checkout@v2
+      
+      # Install essential host packages
+      - name: Install Pakages
+        run: |
+          sudo apt-get update
+          sudo apt-get -y install gawk wget git-core diffstat unzip texinfo gcc-multilib \
+            build-essential chrpath socat cpio python3 python3-pip python3-pexpect xz-utils \
+            debianutils iputils-ping python3-git python3-jinja2 libegl1-mesa libsdl1.2-dev \
+            pylint xterm zstd liblz4-tool
+          sudo apt-get clean
+      
+      # checkout repository
+      - name: Clone meta-riscv, openembedded-core, bitbake, meta-openembedded
+        run: |
+          sudo chown runner /mnt
+          git clone  https://github.com/riscv/meta-riscv.git
+          git clone -b ${TARGET_VERSION} https://github.com/openembedded/openembedded-core.git
+          git clone -b ${TARGET_BITBAKE_VERSION} https://github.com/openembedded/bitbake.git
+          git clone -b ${TARGET_VERSION} https://github.com/openembedded/meta-openembedded.git
+        working-directory: /home/runner/work
+
+      # Run bitbake
+      - name: Bitbake MACHINE=${{ matrix.target_machine }}, TensorFlow-Lite version ${{ matrix.onnxruntime_version }}
+        run: |
+          source /home/runner/work/openembedded-core/oe-init-build-env build
+          bitbake-layers add-layer /home/runner/work/meta-openembedded/meta-oe
+          bitbake-layers add-layer /home/runner/work/meta-openembedded/meta-python
+          bitbake-layers add-layer /home/runner/work/meta-onnxruntime/meta-onnxruntime/
+          bitbake-layers add-layer /home/runner/work/meta-riscv
+          MACHINE=${{matrix.target_machine}} bitbake onnxruntime onnxruntime-python-label-image-example
+        working-directory: /mnt
