@@ -16,20 +16,16 @@ SRC_URI = " \
     file://0001-modify_platform_cpp.patch \
 "
 
-SRC_URI:append:raspberrypi5 = " \
-    file://0001-fix_mlas_build_error_rpi5.patch \
+SRC_URI:append:raspberrypi3-64 = " \
+    file://0001-fix_mlas_build_error.patch \
 "
 
 SRC_URI:append:raspberrypi4-64 = " \
     file://0001-fix_mlas_build_error.patch \
 "
 
-SRC_URI:append:raspberrypi3-64 = " \
-    file://0001-fix_mlas_build_error.patch \
-"
-
-SRC_URI:append:raspberrypi0-2w-64 = " \
-    file://0001-fix_mlas_build_error.patch \
+SRC_URI:append:raspberrypi5 = " \
+    file://0001-fix_mlas_build_error_rpi5.patch \
 "
 
 SRC_URI:append:riscv32 = " \
