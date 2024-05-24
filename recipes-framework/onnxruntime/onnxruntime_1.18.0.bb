@@ -8,10 +8,10 @@ LIC_FILES_CHKSUM = "file://LICENSE;md5=0f7e3b1308cb5c00b372a6e78835732d"
 BPV = "${@'.'.join(d.getVar('PV').split('.')[0:2])}"
 DPV = "${@'.'.join(d.getVar('PV').split('.')[0:3])}"
 
-SRCREV_onnxruntime = "56b660f36940a919295e6f1e18ad3a9a93a10bf7"
+SRCREV_onnxruntime = "45737400a2f3015c11f005ed7603611eaed306a6"
 
 SRC_URI = " \
-    git://github.com/microsoft/onnxruntime.git;name=onnxruntime;branch=rel-1.17.3;protocol=https \
+    git://github.com/microsoft/onnxruntime.git;name=onnxruntime;branch=rel-1.18.0;protocol=https \
     file://0001-fix_requirements.txt.patch \
     file://0001-modify_platform_cpp.patch \
     file://0001-remove-onnxruntime_test.patch \
@@ -160,6 +160,7 @@ EXTRA_OECMAKE:append = " \
     -DCMAKE_INSTALL_PREFIX=/usr  \
     -DCMAKE_CXX_FLAGS=-Wno-error=maybe-uninitialize \
     -DCMAKE_CXX_FLAGS=-Wno-error=array-bounds \
+    -DCMAKE_CXX_FLAGS=-Wno-error=template-id-cdtor \
     -DCMAKE_TLS_VERIFY=ON -DFETCHCONTENT_QUIET=OFF \
     -Donnxruntime_ENABLE_MEMLEAK_CHECKER=OFF \
     -DCMAKE_BUILD_TYPE=Release \

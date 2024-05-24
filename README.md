@@ -12,7 +12,7 @@ Please note that it is not official support.
 
 | BSP | ONNX Runtime version | Build status |
 | :-- | :------ | :----------- |
-| [meta-raspberrypi](https://github.com/agherzan/meta-raspberrypi) | v1.17.3 | [![Bitbake raspberrypi](https://github.com/NobuoTsukamoto/meta-onnxruntime/actions/workflows/build_rpi.yml/badge.svg?branch=main)](https://github.com/NobuoTsukamoto/meta-onnxruntime/actions/workflows/build_rpi.yml) |
+| [meta-raspberrypi](https://github.com/agherzan/meta-raspberrypi) | v1.18.0 | [![Bitbake raspberrypi](https://github.com/NobuoTsukamoto/meta-onnxruntime/actions/workflows/build_rpi.yml/badge.svg?branch=main)](https://github.com/NobuoTsukamoto/meta-onnxruntime/actions/workflows/build_rpi.yml) |
 | [meta-riscv](https://github.com/riscv/meta-riscv)                | - | currently not supported |
 
 ### matrix
@@ -29,7 +29,7 @@ Please note that it is not official support.
 ## Available recipes
 - Framework
     - onnxruntime  
-      [ONNX Runtime](recipes-framework/onnxruntime/onnxruntime_1.17.3.bb)
+      [ONNX Runtime](recipes-framework/onnxruntime/onnxruntime_1.18.0.bb)
 - Examples
     - onnxruntime-python-label-image-example  
       [Python label image](recipes-examples/onnxruntime/onnxruntime-python-label-image-example.bb)
