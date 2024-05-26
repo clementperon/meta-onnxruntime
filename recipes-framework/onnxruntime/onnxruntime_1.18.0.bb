@@ -160,7 +160,6 @@ EXTRA_OECMAKE:append = " \
     -DCMAKE_INSTALL_PREFIX=/usr  \
     -DCMAKE_CXX_FLAGS=-Wno-error=maybe-uninitialize \
     -DCMAKE_CXX_FLAGS=-Wno-error=array-bounds \
-    -DCMAKE_CXX_FLAGS=-Wno-error=template-id-cdtor \
     -DCMAKE_TLS_VERIFY=ON -DFETCHCONTENT_QUIET=OFF \
     -Donnxruntime_ENABLE_MEMLEAK_CHECKER=OFF \
     -DCMAKE_BUILD_TYPE=Release \
@@ -174,10 +173,12 @@ EXTRA_OECMAKE:append = " \
 
 EXTRA_OECMAKE:append:raspberrypi5 = " \
     -Donnxruntime_USE_XNNPACK=OFF \
+    -DCMAKE_CXX_FLAGS=-Wno-error=template-id-cdtor \
 "
 
 EXTRA_OECMAKE:append:raspberrypi4-64 = " \
     -Donnxruntime_USE_XNNPACK=OFF \
+    -DCMAKE_CXX_FLAGS=-Wno-error=template-id-cdtor \
 "
 
 CMAKE_VERBOSE = "VERBOSE=1"
