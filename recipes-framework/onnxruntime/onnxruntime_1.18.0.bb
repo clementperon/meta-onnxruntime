@@ -174,12 +174,10 @@ EXTRA_OECMAKE:append = " \
 
 EXTRA_OECMAKE:append:raspberrypi5 = " \
     -Donnxruntime_USE_XNNPACK=OFF \
-    -DCMAKE_CXX_FLAGS=-Wno-error=template-id-cdtor \
 "
 
 EXTRA_OECMAKE:append:raspberrypi4-64 = " \
     -Donnxruntime_USE_XNNPACK=OFF \
-    -DCMAKE_CXX_FLAGS=-Wno-error=template-id-cdtor \
 "
 
 CMAKE_VERBOSE = "VERBOSE=1"
