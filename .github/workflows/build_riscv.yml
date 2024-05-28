@@ -25,8 +25,8 @@ jobs:
 
     strategy:
       matrix:
-        target_machine: [qemuriscv64, qemuriscv32]
-        onnxruntime_version: [1.17.3]
+        target_machine: [qemuriscv64]
+        onnxruntime_version: [1.18.0]
         
     # The type of runner that the job will run on
     runs-on: ubuntu-22.04
