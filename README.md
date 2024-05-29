@@ -24,7 +24,7 @@ Please note that it is not official support.
 |  | raspberrypi0-2w-64<br>raspberrypi3-64<br>raspberrypi4-64 | OK  |
 |  | raspberrypi5 | OK |
 | [meta-riscv](https://github.com/riscv/meta-riscv) | qemueriscv32 | NG |
-|  | qemuriscv64 | NG |
+|  | qemuriscv64 | OK |
 
 ## Available recipes
 - Framework
