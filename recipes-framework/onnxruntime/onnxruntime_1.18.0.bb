@@ -166,7 +166,6 @@ EXTRA_OECMAKE:append = " \
     -DCMAKE_BUILD_TYPE=Release \
     -DCMAKE_PREFIX_PATH=${WORKDIR}/git/build/Linux/Release/installed \
     -DCMAKE_SYSTEM_PROCESSOR=${ONNXRUNTIME_TARGET_ARCH} \
-    -Donnxruntime_target_platform=ARM \
     -DMLAS_SOURCE_IS_NOT_SET=OFF \
     -DFETCHCONTENT_FULLY_DISCONNECTED=OFF \
     -Donnxruntime_BUILD_UNIT_TESTS=OFF \
