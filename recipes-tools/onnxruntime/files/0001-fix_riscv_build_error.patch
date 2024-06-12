@@ -1,0 +1,13 @@
+diff --git a/cmake/CMakeLists.txt b/cmake/CMakeLists.txt
+index 82a454791d..e8de7cc958 100644
+--- a/cmake/CMakeLists.txt
++++ b/cmake/CMakeLists.txt
+@@ -486,7 +486,7 @@ include(adjust_global_compile_flags.cmake)
+ # We need to link with libatomic on systems that do not have built-in atomics, or
+ # don't have built-in support for 8 byte atomics
+ # Derived from https://github.com/protocolbuffers/protobuf/blob/master/cmake/CMakeLists.txt
+-set(onnxruntime_LINK_LIBATOMIC false)
++set(onnxruntime_LINK_LIBATOMIC ture)
+ # We don't need to link libatomic on iOS
+ if (NOT MSVC AND NOT (CMAKE_SYSTEM_NAME STREQUAL "iOS"))
+   include(CheckCXXSourceCompiles)
