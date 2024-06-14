@@ -59,21 +59,6 @@ OECMAKE_SOURCEPATH = "${S}/cmake"
 
 ONNXRUNTIME_BUILD_DIR = "${WORKDIR}/build/"
 
-ONNXRUNTIME_TARGET_ARCH:raspberrypi = "armv6"
-ONNXRUNTIME_TARGET_ARCH:raspberrypi0 = "armv6"
-ONNXRUNTIME_TARGET_ARCH:raspberrypi0-wifi = "armv6"
-ONNXRUNTIME_TARGET_ARCH:raspberrypi-cm = "armv6"
-ONNXRUNTIME_TARGET_ARCH:raspberrypi2 = "armv7"
-ONNXRUNTIME_TARGET_ARCH:raspberrypi3 = "armv7"
-ONNXRUNTIME_TARGET_ARCH:raspberrypi4 = "armv7"
-ONNXRUNTIME_TARGET_ARCH:raspberrypi-cm3 = "armv7"
-ONNXRUNTIME_TARGET_ARCH:raspberrypi0-2w-64 = "aarch64"
-ONNXRUNTIME_TARGET_ARCH:raspberrypi3-64 = "aarch64"
-ONNXRUNTIME_TARGET_ARCH:raspberrypi4-64 = "aarch64"
-ONNXRUNTIME_TARGET_ARCH:raspberrypi5 = "aarch64"
-ONNXRUNTIME_TARGET_ARCH:riscv32 = "riscv32"
-ONNXRUNTIME_TARGET_ARCH:riscv64 = "riscv64"
-
 PYBIND11_INCLUDE = "${PKG_CONFIG_SYSROOT_DIR}/${PYTHON_SITEPACKAGES_DIR}/pybind11/pybind11/include"
 NUMPY_INCLUDE = "${PKG_CONFIG_SYSROOT_DIR}/${PYTHON_SITEPACKAGES_DIR}/numpy/core/include"
 
@@ -165,7 +150,6 @@ EXTRA_OECMAKE:append = " \
     -Donnxruntime_ENABLE_MEMLEAK_CHECKER=OFF \
     -DCMAKE_BUILD_TYPE=Release \
     -DCMAKE_PREFIX_PATH=${WORKDIR}/git/build/Linux/Release/installed \
-    -DCMAKE_SYSTEM_PROCESSOR=${ONNXRUNTIME_TARGET_ARCH} \
     -Donnxruntime_target_platform=ARM \
     -DMLAS_SOURCE_IS_NOT_SET=OFF \
     -DFETCHCONTENT_FULLY_DISCONNECTED=OFF \
