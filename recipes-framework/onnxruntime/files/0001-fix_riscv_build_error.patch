@@ -7,7 +7,7 @@ index 82a454791d..e8de7cc958 100644
  # don't have built-in support for 8 byte atomics
  # Derived from https://github.com/protocolbuffers/protobuf/blob/master/cmake/CMakeLists.txt
 -set(onnxruntime_LINK_LIBATOMIC false)
-+set(onnxruntime_LINK_LIBATOMIC ture)
++set(onnxruntime_LINK_LIBATOMIC true)
  # We don't need to link libatomic on iOS
  if (NOT MSVC AND NOT (CMAKE_SYSTEM_NAME STREQUAL "iOS"))
    include(CheckCXXSourceCompiles)
