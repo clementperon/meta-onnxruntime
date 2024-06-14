@@ -1,3 +1,5 @@
+Upstream-Status: Pending
+---
 diff --git a/onnxruntime/core/providers/cpu/ml/tree_ensemble_aggregator.h b/onnxruntime/core/providers/cpu/ml/tree_ensemble_aggregator.h
 index b9f3050e59..896f2ad9af 100644
 --- a/onnxruntime/core/providers/cpu/ml/tree_ensemble_aggregator.h
