@@ -1,3 +1,5 @@
+Upstream-Status: Pending
+---
 diff --git a/requirements.txt.in b/requirements.txt.in
 index 89242061fb..a9c1327b8f 100644
 --- a/requirements.txt.in

@@ -1,3 +1,5 @@
+Upstream-Status: Pending
+---
 diff --git a/cmake/onnxruntime_mlas.cmake b/cmake/onnxruntime_mlas.cmake
 index 17de2aa4aa..ea8a0113ea 100644
 --- a/cmake/onnxruntime_mlas.cmake
@@ -31,7 +33,7 @@ index 17de2aa4aa..ea8a0113ea 100644
 -          set_source_files_properties(${MLAS_SRC_DIR}/sbgemm_kernel_neon.cpp PROPERTIES COMPILE_FLAGS " -march=armv8.2-a+bf16 ")
 +          set_source_files_properties(${MLAS_SRC_DIR}/sbgemm_kernel_neon.cpp PROPERTIES COMPILE_FLAGS " -march=armv8.2-a+bf16 -Wno-unused-parameter ")
          endif()
- 
+
          if(ONNXRUNTIME_MLAS_MULTI_ARCH)
 diff --git a/onnxruntime/core/mlas/lib/sbgemm_kernel_neon.cpp b/onnxruntime/core/mlas/lib/sbgemm_kernel_neon.cpp
 index a6a73996c5..2c5a178547 100644
@@ -51,5 +53,5 @@ index a6a73996c5..2c5a178547 100644
      }
 +#endif
  }
- 
+
  const MLAS_SBGEMM_DISPATCH MlasSBGemmDispatchNeon = {
