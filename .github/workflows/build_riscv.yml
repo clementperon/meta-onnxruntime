@@ -3,17 +3,7 @@
 name: Bitbake qemuriscv
 
 # Controls when the workflow will run
-on:
-  # Triggers the workflow on push or pull request events but only for the kirkstone branch
-  push:
-    branches: [ main ]
-  pull_request:
-    branches: [ main ]
-  schedule:
-    - cron: '0 12 * * 5'
-
-  # Allows you to run this workflow manually from the Actions tab
-  workflow_dispatch:
+on: [push]
 
 env:
   TARGET_VERSION: master
@@ -27,7 +17,7 @@ jobs:
       matrix:
         target_machine: [qemuriscv64]
         onnxruntime_version: [1.18.0]
-        
+
     # The type of runner that the job will run on
     runs-on: ubuntu-22.04
 
@@ -35,7 +25,7 @@ jobs:
     steps:
       # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
       - uses: actions/checkout@v2
-      
+
       # Install essential host packages
       - name: Install Pakages
         run: |
@@ -45,7 +35,7 @@ jobs:
             debianutils iputils-ping python3-git python3-jinja2 libegl1-mesa libsdl1.2-dev \
             pylint xterm zstd liblz4-tool
           sudo apt-get clean
-      
+
       # checkout repository
       - name: Clone meta-riscv, openembedded-core, bitbake, meta-openembedded
         run: |
