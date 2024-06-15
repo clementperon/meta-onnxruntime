@@ -30,14 +30,6 @@ SRC_URI:append:raspberrypi5 = " \
     file://0001-fix_mlas_build_error_rpi5.patch \
 "
 
-SRC_URI:append:riscv32 = " \
-    file://0001-fix_riscv_build_error.patch \
-"
-
-SRC_URI:append:riscv64 = " \
-    file://0001-fix_riscv_build_error.patch \
-"
-
 S = "${WORKDIR}/git"
 
 DEPENDS += "\
