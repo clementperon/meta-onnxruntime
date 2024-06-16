@@ -4,13 +4,8 @@ name: Bitbake raspberrypi
 
 # Controls when the workflow will run
 on:
-  # Triggers the workflow on push or pull request events but only for the kirkstone branch
   push:
-    branches: [ main ]
-  pull_request:
-    branches: [ main ]
-  schedule:
-    - cron: '0 12 * * 1'
+  workflow_dispatch:
 
   # Allows you to run this workflow manually from the Actions tab
   workflow_dispatch:
@@ -35,7 +30,7 @@ jobs:
     steps:
       # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
       - uses: actions/checkout@v2
-      
+
       # Install essential host packages
       - name: Install Pakages
         run: |
@@ -46,7 +41,7 @@ jobs:
             pylint xterm zstd liblz4-tool
           sudo apt-get clean
           sudo apt-get autoclean -y
-          
+
       # checkout repository
       - name: Clone poky, meta-raspberrypi, meta-openembedded
         run: |
