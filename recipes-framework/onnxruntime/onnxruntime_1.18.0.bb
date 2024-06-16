@@ -152,8 +152,6 @@ EXTRA_OECMAKE:append:raspberrypi4-64 = " \
     -Donnxruntime_USE_XNNPACK=OFF \
 "
 
-CMAKE_VERBOSE = "VERBOSE=1"
-
 do_configure[network] = "1"
 
 do_compile:append() {
