@@ -37,8 +37,11 @@ DEPENDS += "\
 "
 
 RDEPENDS:${PN} += " \
-    python3 \
+    python3-coloredlogs \
+    python3-flatbuffers \
     python3-numpy \
+    python3-protobuf \
+    python3-sympy \
 "
 
 inherit cmake python3-dir
