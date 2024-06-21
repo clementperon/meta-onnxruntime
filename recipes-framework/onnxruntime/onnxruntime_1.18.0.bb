@@ -16,6 +16,7 @@ SRC_URI = " \
     file://0001-modify_platform_cpp.patch \
     file://0001-remove-onnxruntime_test.patch \
     file://0001-fix-tree_ensemble_aggregator-template-id-cdtor.patch \
+    file://0001-bump-google-nsync.patch \
 "
 
 SRC_URI:append:raspberrypi3-64 = " \
