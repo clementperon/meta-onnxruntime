@@ -22,16 +22,19 @@ SRC_URI = " \
 S = "${WORKDIR}/git"
 
 DEPENDS += "\
-            python3-pip-native \
-            python3-wheel-native \
-            python3 \
-            python3-numpy \
-            python3-pybind11 \
+    python3-numpy \
+    python3-pip-native \
+    python3-pybind11 \
+    python3-wheel-native \
 "
 
 RDEPENDS:${PN} += " \
-    python3 \
+    python3-coloredlogs \
+    python3-flatbuffers \
     python3-numpy \
+    python3-packaging \
+    python3-protobuf \
+    python3-sympy \
 "
 
 inherit cmake python3-dir
