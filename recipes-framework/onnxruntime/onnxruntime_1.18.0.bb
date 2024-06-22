@@ -128,14 +128,9 @@ EXTRA_OECMAKE:append = " \
     -Donnxruntime_USE_TRITON_KERNEL=OFF \
     -Donnxruntime_DISABLE_FLOAT8_TYPES=OFF \
     -DCMAKE_INSTALL_PREFIX=/usr  \
-    -DCMAKE_CXX_FLAGS=-Wno-error=maybe-uninitialize \
-    -DCMAKE_CXX_FLAGS=-Wno-error=array-bounds \
     -DCMAKE_TLS_VERIFY=ON -DFETCHCONTENT_QUIET=OFF \
     -Donnxruntime_ENABLE_MEMLEAK_CHECKER=OFF \
     -DCMAKE_BUILD_TYPE=Release \
-    -DCMAKE_PREFIX_PATH=${WORKDIR}/git/build/Linux/Release/installed \
-    -Donnxruntime_target_platform=ARM \
-    -DMLAS_SOURCE_IS_NOT_SET=OFF \
     -DFETCHCONTENT_FULLY_DISCONNECTED=OFF \
     -Donnxruntime_BUILD_UNIT_TESTS=OFF \
 "
