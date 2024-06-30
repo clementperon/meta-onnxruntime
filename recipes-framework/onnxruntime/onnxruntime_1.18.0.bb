@@ -18,6 +18,7 @@ SRC_URI = " \
     file://0001-fix-tree_ensemble_aggregator-template-id-cdtor.patch \
     file://0001-arm64-force-mcpu-to-be-valid.patch \
     file://0001-bump-google-nsync.patch \
+    file://proper_include.patch \
 "
 
 S = "${WORKDIR}/git"
