@@ -8,27 +8,16 @@ LIC_FILES_CHKSUM = "file://LICENSE;md5=0f7e3b1308cb5c00b372a6e78835732d"
 BPV = "${@'.'.join(d.getVar('PV').split('.')[0:2])}"
 DPV = "${@'.'.join(d.getVar('PV').split('.')[0:3])}"
 
-SRCREV_onnxruntime = "45737400a2f3015c11f005ed7603611eaed306a6"
+SRCREV = "45737400a2f3015c11f005ed7603611eaed306a6"
 
 SRC_URI = " \
-    git://github.com/microsoft/onnxruntime.git;name=onnxruntime;branch=rel-1.18.0;protocol=https \
+    git://github.com/microsoft/onnxruntime.git;branch=rel-1.18.0;protocol=https \
     file://0001-fix_requirements.txt.patch \
     file://0001-modify_platform_cpp.patch \
     file://0001-remove-onnxruntime_test.patch \
     file://0001-fix-tree_ensemble_aggregator-template-id-cdtor.patch \
+    file://0001-arm64-force-mcpu-to-be-valid.patch \
     file://0001-bump-google-nsync.patch \
-"
-
-SRC_URI:append:raspberrypi3-64 = " \
-    file://0001-fix_mlas_build_error.patch \
-"
-
-SRC_URI:append:raspberrypi4-64 = " \
-    file://0001-fix_mlas_build_error.patch \
-"
-
-SRC_URI:append:raspberrypi5 = " \
-    file://0001-fix_mlas_build_error_rpi5.patch \
 "
 
 S = "${WORKDIR}/git"
@@ -156,8 +145,6 @@ EXTRA_OECMAKE:append:raspberrypi5 = " \
 EXTRA_OECMAKE:append:raspberrypi4-64 = " \
     -Donnxruntime_USE_XNNPACK=OFF \
 "
-
-CMAKE_VERBOSE = "VERBOSE=1"
 
 do_configure[network] = "1"
 
