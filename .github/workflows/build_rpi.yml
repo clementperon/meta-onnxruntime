@@ -40,7 +40,7 @@ jobs:
       - uses: actions/checkout@v4
 
       # Install essential host packages
-      - name: Install Pakages
+      - name: Install Packages
         run: |
           sudo apt-get update
           sudo apt-get -y install gawk wget git diffstat unzip texinfo gcc \
@@ -49,6 +49,11 @@ jobs:
             pylint xterm zstd liblz4-tool
           sudo apt-get clean
           sudo apt-get autoclean -y
+
+      - name: Prepare build directory
+        run: |
+          sudo mkdir -p ${BUILD_DIR}
+          sudo chown runner ${BUILD_DIR}
 
       - name: Restore cache
         id: ccache-restore

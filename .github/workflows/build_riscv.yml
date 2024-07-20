@@ -39,7 +39,7 @@ jobs:
       - uses: actions/checkout@v4
 
       # Install essential host packages
-      - name: Install Pakages
+      - name: Install Packages
         run: |
           sudo apt-get update
           sudo apt-get -y install gawk wget git diffstat unzip texinfo gcc \
@@ -47,6 +47,11 @@ jobs:
             debianutils iputils-ping python3-git python3-jinja2 \
             pylint xterm zstd liblz4-tool
           sudo apt-get clean
+
+      - name: Prepare build directory
+        run: |
+          sudo mkdir -p ${BUILD_DIR}
+          sudo chown runner ${BUILD_DIR}
 
       - name: Restore cache
         id: ccache-restore
@@ -69,7 +74,6 @@ jobs:
       # Run bitbake
       - name: Bitbake MACHINE=${{ matrix.target_machine }}, ONNX Runtime version ${{ matrix.onnxruntime_version }}
         run: |
-          sudo mkdir -p ${BUILD_DIR} && sudo chown runner ${BUILD_DIR}
           source ${WORKING_DIR}/openembedded-core/oe-init-build-env ${BUILD_DIR}
           bitbake-layers add-layer ${WORKING_DIR}/meta-openembedded/meta-oe
           bitbake-layers add-layer ${WORKING_DIR}/meta-openembedded/meta-python
