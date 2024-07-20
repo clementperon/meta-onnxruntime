@@ -81,6 +81,11 @@ jobs:
           bitbake-layers add-layer ${WORKING_DIR}/meta-riscv
           MACHINE=${{matrix.target_machine}} bitbake onnxruntime onnxruntime-python-label-image-example
 
+      # Remove all files that hasn't been access in 10 days
+      - name: Clean SState Cache
+        run: |
+          find ${SSTATE_DIR} -type f -mtime +10 -delete
+
       - name: Save cache
         uses: actions/cache/save@v4
         if: always()
