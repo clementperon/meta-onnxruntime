@@ -93,4 +93,4 @@ jobs:
           path: |
             ${{ env.DOWNLOAD_DIR }}
             ${{ env.SSTATE_DIR }}
-          key: ${{ steps.ccache-restore.outputs.cache-primary-key }}
+          key: ${{ steps.ccache-restore.outputs.cache-primary-key }}-${{ github.run_id }}
