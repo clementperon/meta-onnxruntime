@@ -14,6 +14,7 @@ SRC_URI = " \
     git://github.com/microsoft/onnxruntime.git;name=onnxruntime;branch=rel-1.18.1;protocol=https \
     file://0001-remove-onnxruntime_test.patch \
     file://0001-fix-tree_ensemble_aggregator-template-id-cdtor.patch \
+    file://0001-arm64-force-mcpu-to-be-valid.patch \
 "
 
 SRC_URI:append:raspberrypi3-64 = " \
