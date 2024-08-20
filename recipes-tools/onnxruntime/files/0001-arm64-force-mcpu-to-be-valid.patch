@@ -9,19 +9,19 @@ Upstream-Status: Submitted [https://github.com/microsoft/onnxruntime/pull/21117]
  1 file changed, 9 insertions(+), 9 deletions(-)
 
 diff --git a/cmake/onnxruntime_mlas.cmake b/cmake/onnxruntime_mlas.cmake
-index 304aa77f54..8198333590 100644
+index 66f4aea606..4c7cd85d32 100644
 --- a/cmake/onnxruntime_mlas.cmake
 +++ b/cmake/onnxruntime_mlas.cmake
-@@ -353,7 +353,7 @@ else()
-           ${MLAS_SRC_DIR}/sqnbitgemm_kernel_neon.cpp
+@@ -360,7 +360,7 @@ else()
+           ${MLAS_SRC_DIR}/sqnbitgemm_kernel_neon_int8.cpp
          )
-         set_source_files_properties(${MLAS_SRC_DIR}/sqnbitgemm_kernel_neon.cpp
+         set_source_files_properties(${MLAS_SRC_DIR}/sqnbitgemm_kernel_neon_int8.cpp
 -                                    PROPERTIES COMPILE_FLAGS " -march=armv8.2-a+dotprod")
 +                                    PROPERTIES COMPILE_FLAGS " -mcpu=cortex-a78+dotprod -march=armv8.2-a+dotprod")
          if (NOT APPLE)
            set(mlas_platform_srcs
              ${mlas_platform_srcs}
-@@ -369,14 +369,14 @@ else()
+@@ -376,14 +376,14 @@ else()
              ${MLAS_SRC_DIR}/qgemm_kernel_ummla.cpp
              ${MLAS_SRC_DIR}/sbgemm_kernel_neon.cpp
            )
