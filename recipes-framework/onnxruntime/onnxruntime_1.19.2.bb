@@ -8,10 +8,10 @@ LIC_FILES_CHKSUM = "file://LICENSE;md5=0f7e3b1308cb5c00b372a6e78835732d"
 BPV = "${@'.'.join(d.getVar('PV').split('.')[0:2])}"
 DPV = "${@'.'.join(d.getVar('PV').split('.')[0:3])}"
 
-SRCREV = "530a2d7b41b0584f67ddfef6679a79e9dbeee556"
+SRCREV = "ffceed9d44f2f3efb9dd69fa75fea51163c91d91"
 
 SRC_URI = " \
-    git://github.com/microsoft/onnxruntime.git;branch=rel-1.19.0;protocol=https \
+    git://github.com/microsoft/onnxruntime.git;branch=rel-1.19.2;protocol=https \
     file://0001-modify_platform_cpp.patch \
     file://0001-remove-onnxruntime_test.patch \
     file://0001-fix-tree_ensemble_aggregator-template-id-cdtor.patch \
