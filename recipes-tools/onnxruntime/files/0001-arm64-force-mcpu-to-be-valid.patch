@@ -9,10 +9,10 @@ Upstream-Status: Submitted [https://github.com/microsoft/onnxruntime/pull/21117]
  1 file changed, 9 insertions(+), 9 deletions(-)
 
 diff --git a/cmake/onnxruntime_mlas.cmake b/cmake/onnxruntime_mlas.cmake
-index 66f4aea606..4c7cd85d32 100644
+index 0ba4694c32..5003ef7f33 100644
 --- a/cmake/onnxruntime_mlas.cmake
 +++ b/cmake/onnxruntime_mlas.cmake
-@@ -360,7 +360,7 @@ else()
+@@ -368,7 +368,7 @@ else()
            ${MLAS_SRC_DIR}/sqnbitgemm_kernel_neon_int8.cpp
          )
          set_source_files_properties(${MLAS_SRC_DIR}/sqnbitgemm_kernel_neon_int8.cpp
@@ -21,9 +21,9 @@ index 66f4aea606..4c7cd85d32 100644
          if (NOT APPLE)
            set(mlas_platform_srcs
              ${mlas_platform_srcs}
-@@ -376,14 +376,14 @@ else()
-             ${MLAS_SRC_DIR}/qgemm_kernel_ummla.cpp
+@@ -385,15 +385,15 @@ else()
              ${MLAS_SRC_DIR}/sbgemm_kernel_neon.cpp
+             ${MLAS_SRC_DIR}/fp16_neon_common.cpp
            )
 -          set_source_files_properties(${MLAS_SRC_DIR}/aarch64/HalfGemmKernelNeon.S PROPERTIES COMPILE_FLAGS " -march=armv8.2-a+fp16 ")
 -          set_source_files_properties(${MLAS_SRC_DIR}/aarch64/QgemmS8S8KernelSmmla.S PROPERTIES COMPILE_FLAGS " -march=armv8.2-a+i8mm ")
@@ -33,6 +33,7 @@ index 66f4aea606..4c7cd85d32 100644
 -          set_source_files_properties(${MLAS_SRC_DIR}/dwconv.cpp PROPERTIES COMPILE_FLAGS " -march=armv8.2-a+fp16 ")
 -          set_source_files_properties(${MLAS_SRC_DIR}/pooling_fp16.cpp PROPERTIES COMPILE_FLAGS " -march=armv8.2-a+fp16 ")
 -          set_source_files_properties(${MLAS_SRC_DIR}/sbgemm_kernel_neon.cpp PROPERTIES COMPILE_FLAGS " -march=armv8.2-a+bf16 ")
+-          set_source_files_properties(${MLAS_SRC_DIR}/fp16_neon_common.cpp PROPERTIES COMPILE_FLAGS " -march=armv8.2-a+fp16 ")
 +          set_source_files_properties(${MLAS_SRC_DIR}/aarch64/HalfGemmKernelNeon.S PROPERTIES COMPILE_FLAGS " -mcpu=cortex-a78+fp16 -march=armv8.2-a+fp16 ")
 +          set_source_files_properties(${MLAS_SRC_DIR}/aarch64/QgemmS8S8KernelSmmla.S PROPERTIES COMPILE_FLAGS " -mcpu=cortex-a78+i8mm -march=armv8.2-a+i8mm ")
 +          set_source_files_properties(${MLAS_SRC_DIR}/aarch64/QgemmU8X8KernelUmmla.S PROPERTIES COMPILE_FLAGS " -mcpu=cortex-a78+i8mm -march=armv8.2-a+i8mm ")
@@ -41,9 +42,9 @@ index 66f4aea606..4c7cd85d32 100644
 +          set_source_files_properties(${MLAS_SRC_DIR}/dwconv.cpp PROPERTIES COMPILE_FLAGS " -mcpu=cortex-a78+fp16 -march=armv8.2-a+fp16 ")
 +          set_source_files_properties(${MLAS_SRC_DIR}/pooling_fp16.cpp PROPERTIES COMPILE_FLAGS " -mcpu=cortex-a78+fp16 -march=armv8.2-a+fp16 ")
 +          set_source_files_properties(${MLAS_SRC_DIR}/sbgemm_kernel_neon.cpp PROPERTIES COMPILE_FLAGS " -mcpu=cortex-a78+bf16 -march=armv8.2-a+bf16 ")
++          set_source_files_properties(${MLAS_SRC_DIR}/fp16_neon_common.cpp PROPERTIES COMPILE_FLAGS " -mcpu=cortex-a78+bf16 -march=armv8.2-a+fp16 ")
          endif()
  
          if(ONNXRUNTIME_MLAS_MULTI_ARCH)
--- 
-2.39.3 (Apple Git-146)
+
 

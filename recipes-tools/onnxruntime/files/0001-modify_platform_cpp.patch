@@ -1,10 +1,10 @@
 Upstream-Status: Pending
 ---
 diff --git a/onnxruntime/core/mlas/lib/platform.cpp b/onnxruntime/core/mlas/lib/platform.cpp
-index de092f7d1d..1456421729 100644
+index 23d29fd02f..ed48c250dc 100644
 --- a/onnxruntime/core/mlas/lib/platform.cpp
 +++ b/onnxruntime/core/mlas/lib/platform.cpp
-@@ -526,11 +526,11 @@ Return Value:
+@@ -569,11 +569,11 @@ Return Value:
      //
      // Check if the processor supports ASIMD I8MM instructions.
      //
@@ -19,5 +19,6 @@ index de092f7d1d..1456421729 100644
 +        // this->GemmS8S8Dispatch = &MlasGemmS8S8DispatchSmmla;
 +    // }
  #endif
+ 
+ #if defined(MLAS_F16VEC_INTRINSICS_SUPPORTED)
 
- #endif // MLAS_TARGET_ARM64
