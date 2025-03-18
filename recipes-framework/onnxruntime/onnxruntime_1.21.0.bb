@@ -12,8 +12,9 @@ SRCREV = "e0b66cad282043d4377cea5269083f17771b6dfc"
 
 SRC_URI = " \
     git://github.com/microsoft/onnxruntime.git;branch=rel-1.21.0;protocol=https \
+    file://0001-remove-onnxruntime_test.patch \
     file://0001-arm64-force-mcpu-to-be-valid.patch \
-    file://0001-fixonnxruntime_python_cmake.patch \
+    file://0001-remove-numpy-dependency-from_cmake.patch \
 "
 
 S = "${WORKDIR}/git"
