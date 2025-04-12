@@ -87,7 +87,8 @@ jobs:
       # Remove all files that hasn't been access in 10 days
       - name: Clean SState Cache
         run: |
-          find ${SSTATE_DIR} -type f -mtime +10 -delete
+          find ${DOWNLOAD_DIR} -type f -atime +10 -delete
+          find ${SSTATE_DIR} -type f -atime +10 -delete
 
       - name: Save cache
         uses: actions/cache/save@v4
