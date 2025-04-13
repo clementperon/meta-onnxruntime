@@ -62,7 +62,6 @@ jobs:
         uses: actions/cache/restore@v4
         with:
           path: |
-            ${{ env.DOWNLOAD_DIR }}
             ${{ env.SSTATE_DIR }}
           key: cache-${{ matrix.target_machine }}-${{ env.TARGET_VERSION }}
 
@@ -89,7 +88,6 @@ jobs:
       - name: Clean SState Cache
         if: always()
         run: |
-          test -d ${DOWNLOAD_DIR} && find ${DOWNLOAD_DIR} -type f -atime +10 -delete
           test -d ${SSTATE_DIR} && find ${SSTATE_DIR} -type f -atime +10 -delete
 
       - name: Save cache
@@ -97,6 +95,5 @@ jobs:
         if: always()
         with:
           path: |
-            ${{ env.DOWNLOAD_DIR }}
             ${{ env.SSTATE_DIR }}
           key: ${{ steps.ccache-restore.outputs.cache-primary-key }}
