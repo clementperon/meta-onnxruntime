@@ -8,34 +8,13 @@ LIC_FILES_CHKSUM = "file://LICENSE;md5=0f7e3b1308cb5c00b372a6e78835732d"
 BPV = "${@'.'.join(d.getVar('PV').split('.')[0:2])}"
 DPV = "${@'.'.join(d.getVar('PV').split('.')[0:3])}"
 
-SRCREV_onnxruntime = "45737400a2f3015c11f005ed7603611eaed306a6"
+SRCREV = "e0b66cad282043d4377cea5269083f17771b6dfc"
 
 SRC_URI = " \
-    git://github.com/microsoft/onnxruntime.git;name=onnxruntime;branch=rel-1.18.0;protocol=https \
-    file://0001-fix_requirements.txt.patch \
-    file://0001-modify_platform_cpp.patch \
+    git://github.com/microsoft/onnxruntime.git;branch=rel-1.21.0;protocol=https \
     file://0001-remove-onnxruntime_test.patch \
-    file://0001-fix-tree_ensemble_aggregator-template-id-cdtor.patch \
-"
-
-SRC_URI:append:raspberrypi3-64 = " \
-    file://0001-fix_mlas_build_error.patch \
-"
-
-SRC_URI:append:raspberrypi4-64 = " \
-    file://0001-fix_mlas_build_error.patch \
-"
-
-SRC_URI:append:raspberrypi5 = " \
-    file://0001-fix_mlas_build_error_rpi5.patch \
-"
-
-SRC_URI:append:riscv32 = " \
-    file://0001-fix_riscv_build_error.patch \
-"
-
-SRC_URI:append:riscv64 = " \
-    file://0001-fix_riscv_build_error.patch \
+    file://0001-arm64-force-mcpu-to-be-valid.patch \
+    file://0001-remove-numpy-dependency-from_cmake.patch \
 "
 
 S = "${WORKDIR}/git"
@@ -59,23 +38,8 @@ OECMAKE_SOURCEPATH = "${S}/cmake"
 
 ONNXRUNTIME_BUILD_DIR = "${WORKDIR}/build/"
 
-ONNXRUNTIME_TARGET_ARCH:raspberrypi = "armv6"
-ONNXRUNTIME_TARGET_ARCH:raspberrypi0 = "armv6"
-ONNXRUNTIME_TARGET_ARCH:raspberrypi0-wifi = "armv6"
-ONNXRUNTIME_TARGET_ARCH:raspberrypi-cm = "armv6"
-ONNXRUNTIME_TARGET_ARCH:raspberrypi2 = "armv7"
-ONNXRUNTIME_TARGET_ARCH:raspberrypi3 = "armv7"
-ONNXRUNTIME_TARGET_ARCH:raspberrypi4 = "armv7"
-ONNXRUNTIME_TARGET_ARCH:raspberrypi-cm3 = "armv7"
-ONNXRUNTIME_TARGET_ARCH:raspberrypi0-2w-64 = "aarch64"
-ONNXRUNTIME_TARGET_ARCH:raspberrypi3-64 = "aarch64"
-ONNXRUNTIME_TARGET_ARCH:raspberrypi4-64 = "aarch64"
-ONNXRUNTIME_TARGET_ARCH:raspberrypi5 = "aarch64"
-ONNXRUNTIME_TARGET_ARCH:riscv32 = "riscv32"
-ONNXRUNTIME_TARGET_ARCH:riscv64 = "riscv64"
-
 PYBIND11_INCLUDE = "${PKG_CONFIG_SYSROOT_DIR}/${PYTHON_SITEPACKAGES_DIR}/pybind11/pybind11/include"
-NUMPY_INCLUDE = "${PKG_CONFIG_SYSROOT_DIR}/${PYTHON_SITEPACKAGES_DIR}/numpy/core/include"
+NUMPY_INCLUDE = "${PKG_CONFIG_SYSROOT_DIR}/${PYTHON_SITEPACKAGES_DIR}/numpy/_core/include"
 
 OECMAKE_C_FLAGS += "-I${PYTHON_INCLUDE_DIR} -I${PYBIND11_INCLUDE} -I${NUMPY_INCLUDE}"
 OECMAKE_C_FLAGS_RELEASE += "-I${PYTHON_INCLUDE_DIR} -I${PYBIND11_INCLUDE} -I${NUMPY_INCLUDE}"
@@ -138,7 +102,7 @@ EXTRA_OECMAKE:append = " \
     -Donnxruntime_USE_NCCL=OFF \
     -Donnxruntime_BUILD_BENCHMARKS=OFF \
     -Donnxruntime_USE_ROCM=OFF \
-    -DOnnxruntime_GCOV_COVERAGE=OFF \
+    -Donnxruntime_GCOV_COVERAGE=OFF \
     -Donnxruntime_USE_MPI=OFF \
     -Donnxruntime_ENABLE_MEMORY_PROFILE=OFF \
     -Donnxruntime_ENABLE_CUDA_LINE_NUMBER_INFO=OFF \
@@ -161,11 +125,12 @@ EXTRA_OECMAKE:append = " \
     -DCMAKE_INSTALL_PREFIX=/usr  \
     -DCMAKE_CXX_FLAGS=-Wno-error=maybe-uninitialize \
     -DCMAKE_CXX_FLAGS=-Wno-error=array-bounds \
+    -DCMAKE_CXX_FLAGS=-Wno-error=range-loop-construct \
     -DCMAKE_TLS_VERIFY=ON -DFETCHCONTENT_QUIET=OFF \
     -Donnxruntime_ENABLE_MEMLEAK_CHECKER=OFF \
     -DCMAKE_BUILD_TYPE=Release \
     -DCMAKE_PREFIX_PATH=${WORKDIR}/git/build/Linux/Release/installed \
-    -DCMAKE_SYSTEM_PROCESSOR=${ONNXRUNTIME_TARGET_ARCH} \
+    -Donnxruntime_target_platform=ARM \
     -DMLAS_SOURCE_IS_NOT_SET=OFF \
     -DFETCHCONTENT_FULLY_DISCONNECTED=OFF \
     -Donnxruntime_BUILD_UNIT_TESTS=OFF \
@@ -178,8 +143,6 @@ EXTRA_OECMAKE:append:raspberrypi5 = " \
 EXTRA_OECMAKE:append:raspberrypi4-64 = " \
     -Donnxruntime_USE_XNNPACK=OFF \
 "
-
-CMAKE_VERBOSE = "VERBOSE=1"
 
 do_configure[network] = "1"
 
@@ -198,6 +161,7 @@ do_install:append() {
 
 FILES:${PN}-dev = " \
     ${includedir}/onnxruntime/*.h \
+    ${includedir}/onnxruntime/core/providers/*.h \
     ${libdir}/libonnxruntime.so \
     ${libdir}/pkgconfig/libonnxruntime.pc \
     ${libdir}/cmake/onnxruntime/*.cmake \
@@ -208,3 +172,4 @@ FILES:${PN} += "${libdir}/libonnxruntime.so.*"
 FILES:${PN} += "${libdir}/libonnxruntime_providers_shared.so"
 FILES:${PN} += "${libdir}/python3.*/site-packages/*"
 FILES:${PN} += "${bindir}/onnx_test_runner"
+INSANE_SKIP:${PN} += "buildpaths"

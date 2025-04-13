@@ -12,8 +12,8 @@ Please note that it is not official support.
 
 | BSP | ONNX Runtime version | Build status |
 | :-- | :------ | :----------- |
-| [meta-raspberrypi](https://github.com/agherzan/meta-raspberrypi) | v1.18.0 | [![Bitbake raspberrypi](https://github.com/NobuoTsukamoto/meta-onnxruntime/actions/workflows/build_rpi.yml/badge.svg?branch=scarthgap)](https://github.com/NobuoTsukamoto/meta-onnxruntime/actions/workflows/build_rpi.yml) |
-| [meta-riscv](https://github.com/riscv/meta-riscv)                | v1.18.0 | [![Bitbake riscv](https://github.com/NobuoTsukamoto/meta-onnxruntime/actions/workflows/build_riscv.yml/badge.svg?branch=scarthgap)](https://github.com/NobuoTsukamoto/meta-onnxruntime/actions/workflows/build_riscv.yml) |
+| [meta-raspberrypi](https://github.com/agherzan/meta-raspberrypi) | v1.21.0 | [![Bitbake raspberrypi](https://github.com/NobuoTsukamoto/meta-onnxruntime/actions/workflows/build_rpi.yml/badge.svg?branch=scarthgap)](https://github.com/NobuoTsukamoto/meta-onnxruntime/actions/workflows/build_rpi.yml) |
+| [meta-riscv](https://github.com/riscv/meta-riscv)                | v1.21.0 | [![Bitbake riscv](https://github.com/NobuoTsukamoto/meta-onnxruntime/actions/workflows/build_riscv.yml/badge.svg?branch=scarthgap)](https://github.com/NobuoTsukamoto/meta-onnxruntime/actions/workflows/build_riscv.yml) |
 
 ### matrix
 
@@ -28,10 +28,10 @@ Please note that it is not official support.
 
 ## Available recipes
 - Framework
-    - onnxruntime  
-      [ONNX Runtime](recipes-framework/onnxruntime/onnxruntime_1.18.0.bb)
+    - onnxruntime
+      [ONNX Runtime](recipes-framework/onnxruntime/onnxruntime_1.21.0.bb)
 - Examples
-    - onnxruntime-python-label-image-example  
+    - onnxruntime-python-label-image-example
       [Python label image](recipes-examples/onnxruntime/onnxruntime-python-label-image-example.bb)
 
 ## How to
@@ -54,7 +54,7 @@ $ bitbake-layers add-layer ../meta-openembedded/meta-multimedia/
 $ bitbake-layers add-layer ../meta-raspberrypi/
 $ bitbake-layers add-layer ../meta-onnxruntime/
 
-# Add the package to 'conf/auto.conf' file. 
+# Add the package to 'conf/auto.conf' file.
 MACHINE ?= "raspberrypi4-64"
 IMAGE_INSTALL:append = " onnxruntime"
 

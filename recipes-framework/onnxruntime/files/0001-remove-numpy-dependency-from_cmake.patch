@@ -1,0 +1,14 @@
+Upstream-Status: Pending
+---
+diff --git a/cmake/onnxruntime_python.cmake b/cmake/onnxruntime_python.cmake
+index aee6d2ff765..67abd12134d 100644
+--- a/cmake/onnxruntime_python.cmake
++++ b/cmake/onnxruntime_python.cmake
+@@ -205,7 +205,6 @@ target_link_libraries(onnxruntime_pybind11_state PRIVATE
+     onnxruntime_common
+     onnxruntime_flatbuffers
+     ${pybind11_lib}
+-    Python::NumPy
+ )
+ set(onnxruntime_pybind11_state_dependencies
+     ${onnxruntime_EXTERNAL_DEPENDENCIES}
