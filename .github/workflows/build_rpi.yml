@@ -65,6 +65,10 @@ jobs:
             ${{ env.SSTATE_DIR }}
           key: cache-${{ matrix.target_machine }}-${{ env.TARGET_VERSION }}
 
+      - name: Check Atime
+        run: |
+          find ${SSTATE_DIR} -type f -exec stat -c%n\ %y {} \;
+
       # checkout repository
       - name: Clone poky, meta-raspberrypi, meta-openembedded
         run: |
