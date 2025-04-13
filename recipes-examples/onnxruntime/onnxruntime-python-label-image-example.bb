@@ -25,6 +25,7 @@ RDEPENDS:${PN} += " \
 "
 
 S = "${WORKDIR}/git"
+UNPACKDIR ??= "${WORKDIR}"
 
 do_install:append() {
     install -d ${D}${datadir}/onnxruntime/examples/python/
